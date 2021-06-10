@@ -1,2 +1,0 @@
-# GP
-My GP repository
