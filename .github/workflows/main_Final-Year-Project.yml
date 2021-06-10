@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'Final-Year-Project'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_e5b0ac8fe98b4201b5ebb2b3167d5e1b }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_3925d4f64e55426e83f39925a0fd758d }}
