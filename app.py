@@ -12,12 +12,6 @@ import base64
 from gtts import gTTS
 from io import BytesIO, StringIO
 
-#ap = argparse.ArgumentParser()
-#ap.add_argument('-i', '--image', required=True, help="Image Path")
-#args = vars(ap.parse_args())
-
-#img_path = "72218201_e0e9c7d65b.jpg"
-
 def extract_features(image, model):
         image = image.resize((299,299))
         image = np.array(image)
@@ -61,46 +55,21 @@ def predict():
     tokenizer = load(open("tokenizer.p","rb"))
     model = load_model('model_9.h5')
     xception_model = Xception(include_top=False, pooling="avg")
-    
-    print("----------")
-    #request_data = request.get_json()
-    print('----------------')
-    URL = request.form.get('image')
-    #print(URL)
-    #URL = request_data['image']
+    request_data = request.get_json()
+    URL = request_data['image']
 
-##    with urllib.request.urlopen(URL) as url:
-##        f = BytesIO(url.read())
+    with urllib.request.urlopen(URL) as url:    
+        f = BytesIO(url.read())
 
-    #img = Image.open(request.files.get('image', ''))
-
-    #img = Image.open(f)
-    img = Image.open(BytesIO(base64.b64decode(URL)))
-
-    print("------------")
-    print(request.form.get('image'))
-    print("-------------")
-    img = Image.open(BytesIO(base64.b64decode(request.form.get('image'))))
-    #request_data = request.get_json()
-    #img = Image.open(BytesIO(base64.b64decode(request_data['image'])))
+    img = Image.open(f)
 
     photo = extract_features(img, xception_model)
     description = generate_desc(model, tokenizer, photo, max_length)
-    language = 'en'
-    tts = gTTS(text = description, lang = language, slow = False)
-    audio = BytesIO()
-     
-    tts.write_to_fp(audio)
-    
 
-##    return {
-##            "description": description,
-##            "audio": base64.b64encode(audio.getvalue()).decode()
-##    }
+    return {
+            "description": description
+    }
 
-    tts.save("audio.wav")
-    
-    return send_from_directory(app.root_path, "audio.wav")
 
 if __name__ == '__main__':
     app.run(debug=True)
