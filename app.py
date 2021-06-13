@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, send_file, send_from_directory
-from datauri import DataURI
 import urllib
 import numpy as np
 from PIL import Image
