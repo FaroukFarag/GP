@@ -8,7 +8,6 @@ from keras.models import Model, load_model
 from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.image import load_img, img_to_array
 import base64
-from gtts import gTTS
 from io import BytesIO, StringIO
 
 def extract_features(image, model):
@@ -64,6 +63,7 @@ def predict():
 ##    img = Image.open(f)
 
     URL = request.form.get('image')
+    print(URL)
     img = Image.open(BytesIO(base64.b64decode(URL)))
     photo = extract_features(img, xception_model)
     description = generate_desc(model, tokenizer, photo, max_length)
