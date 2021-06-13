@@ -54,19 +54,22 @@ def predict():
     tokenizer = load(open("tokenizer.p","rb"))
     model = load_model('model_9.h5')
     xception_model = Xception(include_top=False, pooling="avg")
-    request_data = request.get_json()
-    URL = request_data['image']
+    
+##    request_data = request.get_json()
+##    URL = request_data['image']
+##
+##    with urllib.request.urlopen(URL) as url:    
+##        f = BytesIO(url.read())
+##
+##    img = Image.open(f)
 
-    with urllib.request.urlopen(URL) as url:    
-        f = BytesIO(url.read())
-
-    img = Image.open(f)
-
+    URL = request.form.get('image')
+    img = Image.open(BytesIO(base64.b64decode(URL)))
     photo = extract_features(img, xception_model)
     description = generate_desc(model, tokenizer, photo, max_length)
 
-    return {
-            "description": description
+    return {    
+        "description": description
     }
 
 
