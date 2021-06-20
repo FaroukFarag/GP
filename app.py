@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify, send_file, send_from_directory
+from flask import Flask, request
+from flask_cors import CORS, cross_origin
 import urllib
 import numpy as np
 from PIL import Image
@@ -46,8 +47,11 @@ def generate_desc(model, tokenizer, photo, max_length):
     return in_text
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/Predict', methods=['POST'])
+@cross_origin()
 def predict():
     max_length = 32
     tokenizer = load(open("tokenizer.p","rb"))
@@ -62,8 +66,13 @@ def predict():
 ##
 ##    img = Image.open(f)
 
+    print("Test")
     URL = request.form.get('image')
+    print("Test")
     print(URL)
+    print("Test")
+    print(URL)
+    print("Test")
     img = Image.open(BytesIO(base64.b64decode(URL)))
     photo = extract_features(img, xception_model)
     description = generate_desc(model, tokenizer, photo, max_length)
