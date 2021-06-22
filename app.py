@@ -4,10 +4,10 @@ import urllib
 import numpy as np
 from PIL import Image
 from pickle import dump, load
-from keras.applications.xception import Xception, preprocess_input
-from keras.models import Model, load_model
-from keras.preprocessing.sequence import pad_sequences
-from keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.applications.xception import Xception, preprocess_input
+from tensorflow.keras.models import Model, load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import base64
 from io import BytesIO, StringIO
 
