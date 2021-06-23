@@ -67,7 +67,10 @@ def predict():
 ##    img = Image.open(f)
 
 
+    print("Test")
     img = Image.open(request.files.get('image', ''))
+    print(request.files.get('image', ''))
+    print("Test")
     photo = extract_features(img, xception_model)
     description = generate_desc(model, tokenizer, photo, max_length)
 
