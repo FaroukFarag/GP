@@ -66,18 +66,12 @@ def predict():
 ##
 ##    img = Image.open(f)
 
-    print("Test")
-    URL = request.form.get('image')
-    print("Test")
-    print(URL)
-    print("Test")
-    print(URL)
-    print("Test")
-    img = Image.open(BytesIO(base64.b64decode(URL)))
+
+    img = Image.open(request.files.get('image', ''))
     photo = extract_features(img, xception_model)
     description = generate_desc(model, tokenizer, photo, max_length)
 
-    return {    
+    return {
         "description": description
     }
 
