@@ -75,6 +75,8 @@ class TokenizerWrap(Tokenizer):
                   for captions_list in captions_listlist]
         return tokens
 
+from tokenizer import TokenizerWrap
+
 with open('tokenizer.pkl', 'rb') as input:
     tokenizer = pickle.load(input)
 
