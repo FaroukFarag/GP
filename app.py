@@ -77,7 +77,8 @@ class TokenizerWrap(Tokenizer):
 
 
 
-tokenizer = pickle.load(open('tokenizer.pkl', 'rb'))
+with open('tokenizer.pkl', 'rb') as input:
+    tokenizer = pickle.load(input)
 
 num_words = 15000
 token_start = tokenizer.word_index[mark_start.strip()]
@@ -219,7 +220,3 @@ def predict():
     return {
         "description": description
     }
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
