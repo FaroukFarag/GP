@@ -75,10 +75,9 @@ class TokenizerWrap(Tokenizer):
                   for captions_list in captions_listlist]
         return tokens
 
-from tokenizer import TokenizerWrap
 
-with open('tokenizer.pkl', 'rb') as input:
-    tokenizer = pickle.load(input)
+
+tokenizer = pickle.load(open('tokenizer.pkl', 'rb'))
 
 num_words = 15000
 token_start = tokenizer.word_index[mark_start.strip()]
