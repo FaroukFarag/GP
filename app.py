@@ -10,7 +10,7 @@ from tensorflow.python.keras.layers import Input, Dense, GRU, Embedding
 from tensorflow.keras.optimizers import RMSprop
 from tensorflow.python.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.applications import InceptionV3
-import pickle
+import dill
 
 def load_image(img, size=None):
 
@@ -41,7 +41,7 @@ mark_end = ' end'
 from TokenizerWrap import TokenizerWrap
 
 with open('tokenizer.pkl', 'rb') as input:
-    tokenizer = pickle.load(input)
+    tokenizer = dill.load(input)
 
 num_words = 15000
 token_start = tokenizer.word_index[mark_start.strip()]
